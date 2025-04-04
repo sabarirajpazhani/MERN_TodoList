@@ -90,6 +90,23 @@ app.put('/todos/:id',async(req,res)=>{
     }
 })
 
+
+//delete items
+app.delete('/todos/:id', async(req, res)=>{
+    try{
+        const id = req.params.id 
+        await todoModel.findByIdAndDelete(id)
+        return res.status(204).json({
+            message: "todo Successfuly deleted"
+        })
+    }
+    catch{
+        res.status(500).json({
+            message: "Internal server error"
+        })
+    }
+})
+
    
 const port = 3000
 app.listen(port, ()=>{
