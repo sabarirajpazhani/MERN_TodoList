@@ -17,9 +17,9 @@ app.post('/todos',(req,res)=>{
     res.status(201).json(newTodo)
 })
 
-// app.get('/',(req, res)=>{
-//     res.send("Hello World!!")
-// })
+app.get('/',(req, res)=>{
+    res.send("Hello World!!")
+})
 
 const port = 3000
 app.listen(port, ()=>{
