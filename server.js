@@ -47,8 +47,17 @@ app.post('/todos',async(req,res)=>{
 
 
 //Get all the items
-app.get('/todos',(req, res)=>{
-    res.json(todos)
+app.get('/todos',async(req, res)=>{
+
+    try{
+        const todos = await todoModel.find()
+        res.status(201).json(todos)
+    }
+    catch{
+        res.status(500).json({
+            message: "Internal server error"
+        })
+    }
 })
 
    
