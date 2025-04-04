@@ -1,10 +1,21 @@
 const express = require('express')
 const app = express();
+const mongoose = require('mongoose')
 
 app.use(express.json())
 
-let todos = []
+// let todos = []
+mongoose.connect ('mongodb://localhost:27017/Mern_todos')
+.then(()=>{
+    console.log('DB Connected!')
+})
+.catch((err)=>{
+    console.log(err)
+})
 
+
+
+//create the items
 app.post('/todos',(req,res)=>{
     const {title, description} = req.body 
     const newTodo = {
@@ -17,11 +28,54 @@ app.post('/todos',(req,res)=>{
     res.status(201).json(newTodo)
 })
 
-app.get('/',(req, res)=>{
-    res.send("Hello World!!")
+//Get all the items
+app.get('/todos',(req, res)=>{
+    res.json(todos)
 })
 
 const port = 3000
 app.listen(port, ()=>{
     console.log("Server is running on port "+ port)
 })
+
+
+
+
+
+// [
+//     {
+//       id: 1,
+//       title: 'Coding Practice',
+//       description: 'Practicing the 5 code'
+//     }
+//   ]
+//   [
+//     {
+//       id: 1,
+//       title: 'Coding Practice',
+//       description: 'Practicing the 5 code'
+//     },
+//     {
+//       id: 2,
+//       title: 'Web development practice',
+//       description: 'Practicing web development'
+//     }
+//   ]
+//   [
+//     {
+//       id: 1,
+//       title: 'Coding Practice',
+//       description: 'Practicing the 5 code'
+//     },
+//     {
+//       id: 2,
+//       title: 'Web development practice',
+//       description: 'Practicing web development'
+//     },
+//     {
+//       id: 3,
+//       title: 'Learning Flutter',
+//       description: 'Flutter application learning'
+//     }
+//   ]
+  
