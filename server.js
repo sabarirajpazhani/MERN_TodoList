@@ -14,6 +14,11 @@ mongoose.connect ('mongodb://localhost:27017/Mern_todos')
 })
 
 
+const todoSchema = new mongoose.Schema({
+    tile: String,
+    description: String
+})
+
 
 //create the items
 app.post('/todos',(req,res)=>{
