@@ -5,6 +5,8 @@ const mongoose = require('mongoose')
 app.use(express.json())
 
 // let todos = []
+
+//DB Connection
 mongoose.connect ('mongodb://localhost:27017/Mern_todos')
 .then(()=>{
     console.log('DB Connected!')
@@ -14,11 +16,15 @@ mongoose.connect ('mongodb://localhost:27017/Mern_todos')
 })
 
 
+//Schema
 const todoSchema = new mongoose.Schema({
     tile: String,
     description: String
 })
 
+
+//Model
+const todoModel = mongoose.model('Todo', todoSchema)
 
 //create the items
 app.post('/todos',(req,res)=>{
