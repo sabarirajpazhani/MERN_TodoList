@@ -4,7 +4,6 @@ const mongoose = require('mongoose')
 
 app.use(express.json())
 
-// let todos = []
 
 //DB Connection
 mongoose.connect ('mongodb://localhost:27017/Mern_todos')
@@ -18,7 +17,7 @@ mongoose.connect ('mongodb://localhost:27017/Mern_todos')
 
 //Schema
 const todoSchema = new mongoose.Schema({
-    tile: String,
+    title: String,
     description: String
 })
 
@@ -26,24 +25,30 @@ const todoSchema = new mongoose.Schema({
 //Model
 const todoModel = mongoose.model('Todo', todoSchema)
 
+
 //create the items
-app.post('/todos',(req,res)=>{
+app.post('/todos',async(req,res)=>{
     const {title, description} = req.body 
-    const newTodo = {
-        id:todos.length + 1,
-        title,
-        description
+
+    try{
+        const newTodos = new  todoModel({title, description})
+        await newTodos.save()
+        res.status(201).json(newTodos)
     }
-    todos.push(newTodo);
-    console.log(todos);
-    res.status(201).json(newTodo)
+    catch{
+        res.status(500).json(err,{
+            message: "Internal Server error"
+        })
+    }
 })
+
 
 //Get all the items
 app.get('/todos',(req, res)=>{
     res.json(todos)
 })
 
+   
 const port = 3000
 app.listen(port, ()=>{
     console.log("Server is running on port "+ port)
