@@ -1,0 +1,14 @@
+{
+  "name": "mern_todolist",
+  "version": "1.0.0",
+  "description": "Todo list project using MERN stack.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sabari Raj",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
