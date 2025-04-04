@@ -60,6 +60,36 @@ app.get('/todos',async(req, res)=>{
     }
 })
 
+
+//udpdate todo items
+
+app.put('/todos/:id',async(req,res)=>{
+
+    try{
+        const {title, description} = req.body
+        const id = req.params.id
+
+        const updatedTodo = await todoModel.findByIdAndUpdate(
+            id,
+            {title, description},
+            {new: true}
+        )
+
+        if(!updatedTodo){
+            return res.status(404).json({
+                message: "Todo not found"
+            })
+        }
+
+        res.status(202).json(updatedTodo)
+    }
+    catch{
+        res.status(500).json({
+            message:"Internal Server error"
+        })
+    }
+})
+
    
 const port = 3000
 app.listen(port, ()=>{
