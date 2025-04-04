@@ -17,7 +17,10 @@ mongoose.connect ('mongodb://localhost:27017/Mern_todos')
 
 //Schema
 const todoSchema = new mongoose.Schema({
-    title: String,
+    title: {
+        type: String,
+        required:true
+    },
     description: String
 })
 
