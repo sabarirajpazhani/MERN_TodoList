@@ -8,7 +8,7 @@ export default function Todo(){
     const [error, setError] = useState("")
     const [message, setMessage] = useState("")
 
-    const apiUrl = "http://localhost:8000/"
+    const apiUrl = "http://localhost:8000"
 
     const handleSubmit =()=>{
         if(title.trim()!=='' && description.trim()!==''){
@@ -38,7 +38,7 @@ export default function Todo(){
         </div>
         <div className="row">
             <h3>Add Items</h3>
-            {message && <p className="text-success">{setMessage}</p>}
+            {message && <p className="text-success">{message}</p>}
             <div className="form-group d-flex gap-2">
                 <input placeholder="text" onChange={(e)=>{setTitle(e.target.value)}} value={title} className="form-control" type="text" />
                 <input placeholder="description" onChange={(e)=>{setDescription(e.target.value)}} value={description} className="form-control" type="text" />
