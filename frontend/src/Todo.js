@@ -11,6 +11,7 @@ export default function Todo(){
     const apiUrl = "http://localhost:8000"
 
     const handleSubmit =()=>{
+        setError("")
         if(title.trim()!=='' && description.trim()!==''){
             fetch(apiUrl+"/todos",{
                 method:"POST",
@@ -23,10 +24,15 @@ export default function Todo(){
                     //add items to list
                     setTodos([...todos, {title, description}])
                     setMessage("Item added successfully")
+                    setTimeout(()=>{
+                        setMessage("")
+                    },3000)
                 }
                 else{
                     setError("Unable to create Todo item")
                 }
+            }).catch(()=>{
+                setError("Unable to create Todo item")
             })
 
             
