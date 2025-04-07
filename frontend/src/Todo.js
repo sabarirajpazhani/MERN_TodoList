@@ -109,6 +109,17 @@ export default function Todo(){
         setEditID(-1)
     }
 
+    const handleDelete = (id) =>{
+        if(window.confirm('Are you sure want to delete?')){
+            fetch(apiUrl+'/todos/'+id,{
+                method: "DELETE"
+            })
+            .then(()=>{
+                const updatedTodos = todos.filter((item) => item._id !==id)
+                setTodos(updatedTodos)
+            })
+        }
+    }
 
     return <>
         <div className="row p-3 bg-success text-light">
@@ -147,7 +158,7 @@ export default function Todo(){
                             </div>
                             <div className="d-flex gap-2">
                                 {editID ===-1 || editID !== item._id ? <button className="btn btn-warning" onClick={() => handleEdit(item)}>Edit</button> : <button className="btn btn-warning" onClick={handleUpdate}>Update</button>}
-                                {editID ===-1 ? <button className="btn btn-danger">Delete</button> :
+                                {editID ===-1 ? <button className="btn btn-danger" onClick={() => handleDelete(item._id)}>Delete</button> :
                                 <button className="btn btn-danger" onClick={handleEditCancle}>Cancel</button> }
                             </div>
                         </li>
